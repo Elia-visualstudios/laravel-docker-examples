@@ -1,6 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\CarController;
 
 Route::get('/', function () {
     Log::info('Welcome page visited');
@@ -18,7 +23,6 @@ Route::get('/health', function () {
     // Check Database Connection
     try {
         DB::connection()->getPdo();
-        // Optionally, run a simple query
         DB::select('SELECT 1');
         $status['database'] = 'OK';
     } catch (\Exception $e) {
@@ -29,11 +33,7 @@ Route::get('/health', function () {
     try {
         Cache::store('redis')->put('health_check', 'OK', 10);
         $value = Cache::store('redis')->get('health_check');
-        if ($value === 'OK') {
-            $status['redis'] = 'OK';
-        } else {
-            $status['redis'] = 'Error';
-        }
+        $status['redis'] = ($value === 'OK') ? 'OK' : 'Error';
     } catch (\Exception $e) {
         $status['redis'] = 'Error';
     }
@@ -45,21 +45,16 @@ Route::get('/health', function () {
         $content = Storage::get($testFile);
         Storage::delete($testFile);
 
-        if ($content === 'OK') {
-            $status['storage'] = 'OK';
-        } else {
-            $status['storage'] = 'Error';
-        }
+        $status['storage'] = ($content === 'OK') ? 'OK' : 'Error';
     } catch (\Exception $e) {
         $status['storage'] = 'Error';
     }
 
-    // Determine overall health status
-    $isHealthy = collect($status)->every(function ($value) {
-        return $value === 'OK';
-    });
-
+    $isHealthy = collect($status)->every(fn($value) => $value === 'OK');
     $httpStatus = $isHealthy ? 200 : 503;
 
     return response()->json($status, $httpStatus);
 });
+
+
+Route::resource('cars', CarController::class);
