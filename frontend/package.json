@@ -1,0 +1,24 @@
+{
+  "name": "2025-05-27-full-stack-with-db",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "seed": "node seed.js",
+    "serve": "live-server . --open=index.html --port=8080",
+    "sass": "sass styles/main.scss:dist/main.css --watch",
+    "frontend": "concurrently --names \"SASS,SERVE\" \"npm run sass\" \"npm run serve\"",
+    "start": "npm run frontend"
+    
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "cors": "^2.8.5",
+    "http-proxy-middleware": "^3.0.5",
+    "live-server": "^1.2.2",
+    "sass": "^1.89.0"
+  }
+}

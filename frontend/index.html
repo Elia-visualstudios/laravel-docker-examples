@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <title>Le Tue Liste e Note Bele</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="description" content="Gestione di liste e note bele!" />
+    <link rel="stylesheet" href="./dist/main.css" />
+    
+</head>
+
+<body>
+    <div class="container">
+        <h1>Aggiungi nota bela</h1>
+
+        <div class="content-wrapper">
+            
+            <div class="left-column">
+                <div class="list-management-section">
+                    <h2>Le mie Liste</h2>
+                    <div id="nested-lists-container" class="lists-display">
+                        <ul id="main-list-tree" class="list-tree">
+                            <p>Caricamento delle liste...</p>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="note-management-section">
+                    <h2>Note della Lista Selezionata</h2>
+                    <div id="note-list-display" class="note-list-img">
+                        <div id="note-list-div" class="notes-container">
+                            <p>Seleziona una lista per visualizzare le note bele.</p>
+                        </div>
+                        <img src="./immagini/borat.jpg" alt="foto bela" class="borat-img"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-column">
+                 <div class="list-form-section">
+                    <h2>Crea Nuova Lista</h2>
+                    <form id="lista-form" class="input-form">
+                        <input type="text" id="insert-lista" placeholder="Nome nuova lista bela" required />
+                        <select id="parent-lista-select" class="lista-selettore">
+                            <option value="">Nessun Genitore (Lista di primo livello)</option>
+                            </select>
+                        <button type="submit">Crea Lista Bela</button>
+                    </form>
+                </div>
+
+                <div class="note-form-section">
+                    <h2>Aggiungi Nuova Nota</h2>
+                    <form id="nota-form" class="input-form">
+                        <input type="text" id="insert-nota" placeholder="Tu inserire nota bela" required /><br/>
+                        <button type="submit">Inserisci Nota Bela</button>
+                    </form>
+                </div>
+            </div>
+
+        </div> </div> <script src="./script/main.js"></script>
+</body>
+
+</html>

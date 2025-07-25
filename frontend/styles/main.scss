@@ -1,0 +1,402 @@
+// COLORI TEMA BORAT
+$background-color: #dbcb97e5; 
+$accent-color: #ffcc00; 
+$border-color: #b8860b; 
+$text-color: #222;
+$text-muted: #888;
+$highlight: #e6007e; 
+$hover-effect: #ffaa00;
+
+// FONT STILE BORAT 
+$font-family: 'Comic Sans MS', cursive, sans-serif;
+
+body {
+  font-family: $font-family;
+  background-color: $background-color;
+  margin: 0;
+  padding: 0;
+  color: $text-color;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  padding-top: 1.5rem; 
+}
+
+.container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 1.5rem auto; 
+  padding: 0; /* RIMOSSO: padding, lo gestiamo nelle sezioni interne */
+  background: none; /* RIMOSSO: sfondo */
+  box-shadow: none; /* RIMOSSO: ombra */
+  border-radius: 0; /* RIMOSSO: border-radius */
+}
+
+// NUOVI STILI PER IL LAYOUT A DUE COLONNE
+.content-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; 
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 2rem;
+}
+
+.left-column,
+.right-column {
+    flex: 1;
+    min-width: 300px;
+    padding: 0; /* RIMOSSO: padding qui, lo gestiamo nelle sezioni interne */
+}
+
+.left-column {
+    order: 1;
+}
+
+.right-column {
+    order: 2;
+}
+// FINE NUOVI STILI LAYOUT
+
+h1, h2, h3 {
+  color: $text-color;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  margin-bottom: 0.8rem; 
+}
+
+h1 {
+    font-size: 2.2rem; 
+    color: $highlight;
+}
+
+h2 {
+    font-size: 1.6rem; 
+    border-bottom: 1px solid $border-color; 
+    padding-bottom: 0.4rem; 
+    margin-top: 1.8rem; 
+}
+
+h3 {
+    font-size: 1.3rem; 
+    margin-top: 1.2rem; 
+}
+
+/* Stile comune per i form di input - Questi saranno le "isole" */
+.input-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1.2rem; 
+  border: 3px dashed $accent-color; /* Mantenuto o aggiunto per l'isola */
+  padding: 1.2rem; 
+  width: 90%;
+  max-width: 380px; 
+  margin-left: auto;
+  margin-right: auto;
+  background: rgba(255, 255, 255, 0.5); /* AGGIUNTO: Sfondo per l'isola */
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* AGGIUNTO: Ombra per l'isola */
+  margin-bottom: 1.5rem; /* AGGIUNTO: Spazio sotto il form isola */
+}
+
+.input-form input[type="text"],
+.input-form select {
+  width: calc(100% - 20px);
+  padding: 0.7rem; 
+  margin-bottom: 0.8rem; 
+  border: 2px dotted $border-color;
+  border-radius: 6px;
+  font-size: 0.95rem; 
+  background-color: #fffbe6;
+  box-sizing: border-box;
+
+  &:focus {
+    outline: none;
+    border-color: $highlight;
+    background-color: lighten(#fffbe6, 5%);
+    box-shadow: 0 0 8px $highlight;
+  }
+}
+
+.input-form button {
+  padding: 0.7rem 1.4rem; 
+  background-color: $accent-color;
+  color: $text-color;
+  border: 2px solid $border-color;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem; 
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: background-color 0.2s, transform 0.2s;
+
+  &:hover {
+    background-color: $hover-effect;
+    transform: translateY(-2px);
+  }
+}
+
+/* Stili specifici per le sezioni che diventano isole */
+.list-management-section, /* Sezione di visualizzazione liste (sinistra) */
+.note-management-section, /* Sezione di visualizzazione note (sinistra) */
+.list-form-section, /* Sezione del form lista (destra) - Questa non ha bisogno di bordi extra se .input-form li ha già*/
+.note-form-section { /* Sezione del form nota (destra) - Questa non ha bisogno di bordi extra se .input-form li ha già*/
+    margin-bottom: 1.5rem; 
+    padding: 0; /* RIMOSSO: padding, lo gestiamo negli elementi interni come .lists-display e .notes-display */
+    border-radius: 8px;
+    background: none; /* RIMOSSO: sfondo qui */
+}
+
+/* Stile per l'albero delle liste - Questa è un'isola */
+.lists-display { 
+  margin-top: 1.2rem; 
+  padding: 0.8rem; 
+  border: 2px solid $border-color; /* AGGIUNTO/MANTENUTO: Bordo per l'isola */
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.4); /* AGGIUNTO/MANTENUTO: Sfondo per l'isola */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* AGGIUNTO: Ombra per l'isola */
+  margin-bottom: 1.5rem; /* AGGIUNTO: Spazio sotto l'isola */
+}
+
+.list-tree {
+  list-style: none;
+  padding: 0;
+  margin: 0.8rem auto; 
+  width: 90%;
+  max-width: 380px; 
+}
+
+.list-item {
+  background-color: lighten($accent-color, 30%);
+  padding: 0.7rem; 
+  margin-bottom: 0.4rem; 
+  border: 2px dashed $border-color;
+  border-radius: 6px;
+  font-size: 0.9rem; 
+  font-style: italic;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: lighten($hover-effect, 20%);
+    transform: translateX(5px);
+  }
+}
+
+.list-name {
+  cursor: pointer;
+  flex-grow: 1;
+  padding-right: 8px; 
+
+  &.active {
+    font-weight: bold;
+    color: $highlight;
+    text-shadow: 0 0 5px rgba($highlight, 0.5);
+  }
+}
+
+.nested-list {
+  list-style: none;
+  padding-left: 1.2rem; 
+  margin-top: 0.4rem; 
+}
+
+.delete-button-list {
+  background-color: #ff4d4d;
+  color: white;
+  border: 1px solid #cc0000;
+  border-radius: 4px;
+  padding: 0.2em 0.5em; 
+  font-size: 0.75em; 
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #cc0000;
+  }
+}
+
+/* Stili per le note - Questa è un'isola */
+.notes-display { 
+  margin-top: 1.5rem; 
+  padding: 1rem; 
+  border: 2px solid $border-color; /* AGGIUNTO/MANTENUTO: Bordo per l'isola */
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.4); /* AGGIUNTO/MANTENUTO: Sfondo per l'isola */
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* AGGIUNTO: Ombra per l'isola */
+  margin-bottom: 1.5rem; /* AGGIUNTO: Spazio sotto l'isola */
+}
+
+.notes-container {
+  margin-top: 0.8rem; 
+  min-height: 90px; 
+  padding: 0.5rem; 
+  border: 1px dashed $text-muted;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.note-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: lighten($accent-color, 25%);
+  padding: 0.5rem; 
+  margin-bottom: 0.3rem; 
+  border: 1px solid $border-color;
+  border-radius: 5px;
+  font-size: 0.88rem; 
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: lighten($hover-effect, 15%);
+    transform: scale(1.01);
+  }
+
+  input[type="checkbox"] {
+    margin-right: 0.6rem; 
+    transform: scale(1.1); 
+    accent-color: $highlight;
+  }
+
+  span {
+    flex-grow: 1;
+    text-align: left;
+  }
+
+  .delete-button {
+    background-color: #ff4d4d;
+    color: white;
+    border: 1px solid #cc0000;
+    border-radius: 4px;
+    padding: 0.2em 0.4em; 
+    font-size: 0.65em; 
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: #cc0000;
+    }
+  }
+}
+
+.sbarrato {
+  text-decoration: line-through;
+  color: $text-muted;
+}
+
+/* Stile per l'immagine */
+.borat-img {
+  width: 100%;
+  max-width: 220px; 
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 1.8rem; 
+}
+
+/* Regole per la responsività */
+@media (max-width: 850px) { 
+    .content-wrapper {
+        flex-direction: column; 
+        gap: 0; 
+    }
+
+    .left-column,
+    .right-column {
+        min-width: unset; 
+        width: 100%; 
+    }
+
+    .right-column {
+        margin-top: 2rem; 
+    }
+
+    .input-form {
+        max-width: 90%; 
+    }
+
+    .lists-display, .notes-display { /* Adatta larghezza isole anche in responsivo */
+        max-width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .list-tree {
+        max-width: 90%; 
+    }
+}
+
+
+@media (max-width: 600px) {
+  .container {
+    margin: 0.8rem auto; 
+    padding: 0.8rem; 
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+  }
+
+  .input-form {
+    padding: 0.8rem;
+  }
+
+  .input-form input[type="text"],
+  .input-form select,
+  .input-form button {
+    margin-bottom: 0.5rem;
+  }
+
+  .list-item {
+    font-size: 0.8rem;
+    padding: 0.5rem;
+  }
+
+  .note-item {
+    font-size: 0.75rem;
+    padding: 0.4rem;
+  }
+
+  .borat-img {
+    max-width: 150px;
+  }
+
+.borat-img {
+  width: 90%; /* Aumenta leggermente la larghezza, occupando più spazio del suo contenitore */
+  max-width: 280px; /* Imposta una dimensione massima un po' più generosa */
+  height: auto;
+  border-radius: 12px; /* Rendi gli angoli un po' più morbidi */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Aumenta l'ombra per un effetto più pronunciato */
+  margin-top: 2rem; /* Aumenta leggermente il margine superiore per più spazio */
+  margin-left: auto;   
+  margin-right: auto;  
+  display: block;      
+  // Aggiungi transizioni per effetti fluidi (opzionale ma carino)
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+
+  // Effetto al passaggio del mouse per renderla più "viva" (opzionale)
+  &:hover {
+    transform: scale(1.05) rotate(2deg); /* Leggero ingrandimento e rotazione al passaggio del mouse */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  }
+}
+
+// ... (resto del codice CSS) ...
+
+
+}
