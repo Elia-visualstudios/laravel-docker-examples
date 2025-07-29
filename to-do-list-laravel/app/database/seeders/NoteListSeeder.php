@@ -18,9 +18,22 @@ class NoteListSeeder extends Seeder
 
         // Lista principale
         $listaDiViaggio = Lista::firstOrCreate([
-            'nome' => 'Preparazione per grande viaggio in U.S. and A. per scopo glorioso',
-            'parent_lista_id' => null
-        ]);
+    'nome' => 'Preparazione per grande viaggio in U.S. and A. per scopo glorioso',
+    'parent_lista_id' => null
+]);
+
+// Qui fuori dalla prima chiamata creo le note collegate a questa lista
+Note::firstOrCreate([
+    'text' => 'Fare il check dei documenti per il viaggio',
+    'lista_id' => $listaDiViaggio->id,
+], ['checkbox' => false]);
+
+Note::firstOrCreate([
+    'text' => 'Prenotare l\'hotel a New York',
+    'lista_id' => $listaDiViaggio->id,
+], ['checkbox' => false]);
+
+        
 
         // Associa tag
         $listaDiViaggio->tags()->sync([$tagImportante->id, $tagViaggio->id]);

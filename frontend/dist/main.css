@@ -1,8 +1,9 @@
+@charset "UTF-8";
 body {
   font-family: "Comic Sans MS", cursive, sans-serif;
   background-color: rgba(219, 203, 151, 0.8980392157);
   margin: 0;
-  padding: 1.5rem 0 3rem 0;
+  padding: 1.5rem 0 3rem 0; /* Padding verticale per spazio sopra e sotto */
   color: #222;
   display: flex;
   flex-direction: column;
@@ -14,35 +15,38 @@ body {
 
 .container {
   width: 100%;
-  max-width: 1000px;
-  margin: 0 auto;
+  max-width: 1000px; /* Larghezza massima aumentata per il layout a 3 colonne */
+  margin: 0 auto; /* Centra il container principale */
   padding: 0;
 }
 
 .content-wrapper {
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  align-items: flex-start;
+  flex-wrap: wrap; /* Permette alle colonne di andare a capo su schermi piccoli */
+  gap: 20px; /* Spazio tra le colonne */
+  justify-content: center; /* Centra le colonne orizzontalmente */
+  align-items: flex-start; /* Allinea le colonne in alto */
   margin-top: 2rem;
 }
 
 .left-column,
-.center-column,
 .right-column {
-  flex: 1;
-  min-width: 300px;
+  flex: 1; /* Le colonne si espandono per occupare spazio */
+  min-width: 300px; /* Larghezza minima per evitare che si comprimano troppo */
+  max-width: 350px; /* NUOVO: Limita la larghezza massima delle colonne laterali */
   padding: 0;
-}
-
-.left-column {
-  order: 1;
 }
 
 .center-column {
   order: 2;
-  max-width: 400px;
+  max-width: 400px; /* Larghezza massima per la colonna centrale */
+  flex: 1; /* Anche la colonna centrale si espande */
+  min-width: 300px; /* Mantenuto il min-width per la colonna centrale */
+  padding: 0;
+}
+
+.left-column {
+  order: 1; /* Ordine delle colonne */
 }
 
 .right-column {
@@ -76,11 +80,11 @@ h3 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 1.2rem auto 1.5rem auto;
+  margin: 1.2rem auto 1.5rem auto; /* Centra e aggiunge margine */
   border: 3px dashed #ffcc00;
   padding: 1.2rem;
   width: 90%;
-  max-width: 380px;
+  max-width: 380px; /* Larghezza massima delle form */
   background: rgba(255, 255, 255, 0.5);
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -88,14 +92,14 @@ h3 {
 
 .input-form input[type=text],
 .input-form select {
-  width: calc(100% - 20px);
+  width: calc(100% - 20px); /* 100% meno il padding */
   padding: 0.7rem;
   margin-bottom: 0.8rem;
   border: 2px dotted #b8860b;
   border-radius: 6px;
   font-size: 0.95rem;
   background-color: #fffbe6;
-  box-sizing: border-box;
+  box-sizing: border-box; /* Include padding e border nella larghezza */
 }
 .input-form input[type=text]:focus,
 .input-form select:focus {
@@ -128,11 +132,12 @@ h3 {
 .note-form-section,
 .archive-section,
 .tag-management-section,
-.assign-tag-section {
+.assign-tag-section,
+.image-section { /* AGGIUNTO: per includere la sezione dell'immagine */
   margin-bottom: 1.5rem;
-  padding: 0;
+  padding: 0; /* Mantenuto il padding a 0 come da tua indicazione */
   border-radius: 8px;
-  background: none;
+  background: none; /* Mantenuto senza sfondo diretto */
 }
 
 .lists-display,
@@ -151,7 +156,7 @@ h3 {
   padding: 0;
   margin: 0.8rem auto;
   width: 90%;
-  max-width: 380px;
+  max-width: 380px; /* Uniformato a 380px come i form */
 }
 
 .list-item {
@@ -210,6 +215,9 @@ h3 {
   border: 1px dashed #888;
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.2);
+  width: 90%; /* NUOVO: Imposta la larghezza per uniformità */
+  max-width: 380px; /* NUOVO: Imposta il max-width per uniformità */
+  margin: 0.8rem auto; /* NUOVO: Centra all'interno della colonna */
 }
 
 .note-item {
@@ -257,28 +265,32 @@ h3 {
 }
 
 .borat-img {
-  width: 100%;
-  max-width: 220px;
+  width: 90%; /* Mantiene la reattività */
+  max-width: 360px; /* AGGIORNATO: Larghezza massima aumentata per bilanciare con i form */
   height: auto;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-top: 1.8rem;
-  transition: transform 0.3s ease-in-out;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  margin-top: 2rem;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 .borat-img:hover {
-  transform: scale(1.1) rotate(-2deg);
-  box-shadow: 0 0 15px #e6007e;
+  transform: scale(1.05) rotate(2deg);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
 .hidden {
-  display: none !important;
+  display: none !important; /* Forza la scomparsa */
 }
 
 .tag-list {
   list-style: none;
   padding-left: 0;
   margin: 0.6rem auto;
-  max-width: 360px;
+  width: 90%; /* NUOVO: Imposta la larghezza per uniformità */
+  max-width: 380px; /* NUOVO: Imposta il max-width per uniformità */
 }
 
 .tag-list li {
@@ -290,11 +302,15 @@ h3 {
   color: #e6007e;
   font-weight: 600;
   border: 1px dashed #e6007e;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .tag-checkbox-group {
-  max-width: 360px;
-  margin: 0.8rem auto;
+  max-width: 380px; /* NUOVO: Uniformato il max-width */
+  width: 90%; /* NUOVO: Imposta la larghezza per uniformità */
+  margin: 0.8rem auto; /* Centra all'interno della colonna */
   text-align: left;
 }
 .tag-checkbox-group label {
@@ -336,14 +352,61 @@ button:disabled {
   transform: none;
 }
 
+#toggle-archive-btn { /* AGGIUNTO: Stili specifici per questo bottone */
+  display: block;
+  width: 90%;
+  margin: 0.8rem auto 1.5rem auto; /* Centra e aggiunge margine */
+  max-width: 380px; /* Per coerenza con gli altri elementi */
+}
+
 @media (max-width: 900px) {
   .content-wrapper {
     flex-direction: column;
+    align-items: center;
   }
   .left-column,
   .center-column,
   .right-column {
-    max-width: 100%;
+    max-width: 95%; /* Occupano quasi tutta la larghezza disponibile */
+    min-width: unset; /* Rimuovi min-width per flessibilità */
+  }
+  /* Aggiustamenti per le sezioni sui piccoli schermi */
+  .list-management-section,
+  .note-management-section,
+  .list-form-section,
+  .note-form-section,
+  .archive-section,
+  .tag-management-section,
+  .assign-tag-section,
+  .image-section {
+    width: 100%; /* Occupano tutta la larghezza nella colonna */
+  }
+  .input-form,
+  .lists-display,
+  .notes-display,
+  .tag-list,
+  .tag-checkbox-group,
+  #toggle-archive-btn { /* AGGIUNTO: includi anche il bottone archivio */
+    max-width: 100%; /* Rimuovi il max-width fisso per adattarsi */
+    width: 95%; /* Usa una percentuale per flessibilità */
+    margin-left: auto;
+    margin-right: auto;
+  }
+  /* Testo più piccolo per schermi stretti */
+  h1 {
+    font-size: 2rem;
+  }
+  h2 {
+    font-size: 1.4rem;
+  }
+  h3 {
+    font-size: 1.1rem;
+  }
+  .input-form input, .input-form select, .input-form button {
+    font-size: 0.9rem;
+  }
+  .list-item, .note-item {
+    font-size: 0.85rem;
   }
 }
 
