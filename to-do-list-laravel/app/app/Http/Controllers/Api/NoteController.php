@@ -4,46 +4,81 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Note;
-use App\Models\Lista; // Importa il modello Lista
+use App\Models\Lista;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class NoteController extends Controller
 {
-    /**
-     * Store a newly created note for a specific list.
-     */
-    public function store(Request $request, Lista $list) // Inietta il modello Lista
+    public function indexByList(Lista $list)
     {
-        $request->validate([
-            'text' => 'required|string',
-            'checkbox' => 'boolean',
-        ]);
-
-        // Crea la nota associandola alla lista iniettata
-        $note = $list->notes()->create($request->all());
-        return response()->json($note, 201); // 201 Created
+        $notes = $list->notes()->get();
+        return response()->json($notes);
     }
 
-    /**
-     * Update the specified note in storage.
-     */
-    public function update(Request $request, Note $note)
+    public function store(Request $request, Lista $list)
     {
-        $request->validate([
-            'checkbox' => 'sometimes|boolean',
-            'text' => 'sometimes|string',
-        ]);
+    $request->validate([
+    'text' => 'required|string',
+    'checkbox' => 'boolean',  // invece di 'completed'
+]);
 
-        $note->update($request->all());
-        return response()->json($note);
+    $note = $list->notes()->create([
+    'text' => $request->text,
+    'checkbox' => $request->checkbox ?? false,  // invece di completed
+]);
+
+        return response()->json($note, 201);
     }
 
-    /**
-     * Remove the specified note from storage.
-     */
-    public function destroy(Note $note)
-    {
-        $note->delete();
-        return response()->json(['data' => $note], 201); // 201 Created    }
+    public function update(Request $request, $id)
+{
+    Log::info('Update request', [
+        'id' => $id,
+        'data' => $request->all()
+    ]);
+
+    $note = Note::find($id);
+
+    if (!$note) {
+        Log::error('Nota non trovata', ['id' => $id]);
+        return response()->json(['error' => 'Nota non trovata'], 404);
+    }
+
+    $request->validate([
+        'checkbox' => 'sometimes|boolean',
+        'text' => 'sometimes|string',
+    ]);
+
+    $updateData = [];
+
+    if ($request->has('checkbox')) {
+        $updateData['checkbox'] = $request->checkbox;
+    }
+    if ($request->has('text')) {
+        $updateData['text'] = $request->text;
+    }
+
+    Log::info('Dati da aggiornare', $updateData);
+
+    $note->update($updateData);
+
+    $note->refresh();
+
+    Log::info('Nota aggiornata', $note->toArray());
+
+    return response()->json($note);
 }
+
+    public function destroy($id)  // Cambiato anche questo per coerenza
+    {
+        $note = Note::find($id);
+        
+        if (!$note) {
+            return response()->json(['error' => 'Nota non trovata'], 404);
+        }
+        
+        $note->delete();
+        return response()->json(['message' => 'Nota eliminata con successo'], 200);
+    }
 }

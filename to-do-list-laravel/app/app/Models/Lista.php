@@ -9,11 +9,9 @@ class Lista extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nome', 'parent_lista_id'];
+    protected $fillable = ['nome', 'parent_lista_id', 'archived']; // Aggiungi 'archived'
 
-    /**
-     * Una lista può avere un genitore (un'altra lista).
-     */
+    
     public function parent()
     {
         return $this->belongsTo(Lista::class, 'parent_lista_id');
@@ -38,12 +36,10 @@ class Lista extends Model
         return $this->children()->with('childrenRecursive');
     }
 
-    /**
-     * Una lista può avere molte note.
-     */
+
     public function notes()
     {
-        // Corretto: usa Note::class (con la 'e' finale)
+        
         return $this->hasMany(Note::class, 'lista_id');
     }
 
@@ -55,4 +51,15 @@ class Lista extends Model
     {
         return $query->whereNull('parent_lista_id');
     }
+    
+    public function scopeActive($query)
+{
+    return $query->where('archived', false);
+}
+ 
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'list_tag', 'lista_id', 'tag_id');
+    }
+
 }

@@ -2,9 +2,10 @@ services:
   app:
     build: .
     volumes:
-      - .:/var/www/html       # live reload while editing
+      - .:/var/www/html
     ports:
-      - "8000:8000"           # http://localhost:8000
+      - "8000:8000"   # già presente, per eventuale fallback
+      - "3000:3000"   # ⬅️ AGGIUNGI QUESTA RIGA
     environment:
       APP_ENV: local
       DB_CONNECTION: sqlite

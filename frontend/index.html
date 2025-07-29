@@ -1,64 +1,70 @@
 <!DOCTYPE html>
 <html lang="it">
-
 <head>
-    <title>Le Tue Liste e Note Bele</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="description" content="Gestione di liste e note bele!" />
-    <link rel="stylesheet" href="./dist/main.css" />
-    
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Gestione di liste e note bele!" />
+  <title>Le Tue Liste e Note Bele</title>
+  <link rel="stylesheet" href="./dist/main.css" />
 </head>
-
 <body>
-    <div class="container">
-        <h1>Aggiungi nota bela</h1>
-
-        <div class="content-wrapper">
-            
-            <div class="left-column">
-                <div class="list-management-section">
-                    <h2>Le mie Liste</h2>
-                    <div id="nested-lists-container" class="lists-display">
-                        <ul id="main-list-tree" class="list-tree">
-                            <p>Caricamento delle liste...</p>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="note-management-section">
-                    <h2>Note della Lista Selezionata</h2>
-                    <div id="note-list-display" class="note-list-img">
-                        <div id="note-list-div" class="notes-container">
-                            <p>Seleziona una lista per visualizzare le note bele.</p>
-                        </div>
-                        <img src="./immagini/borat.jpg" alt="foto bela" class="borat-img"/>
-                    </div>
-                </div>
-            </div>
-
-            <div class="right-column">
-                 <div class="list-form-section">
-                    <h2>Crea Nuova Lista</h2>
-                    <form id="lista-form" class="input-form">
-                        <input type="text" id="insert-lista" placeholder="Nome nuova lista bela" required />
-                        <select id="parent-lista-select" class="lista-selettore">
-                            <option value="">Nessun Genitore (Lista di primo livello)</option>
-                            </select>
-                        <button type="submit">Crea Lista Bela</button>
-                    </form>
-                </div>
-
-                <div class="note-form-section">
-                    <h2>Aggiungi Nuova Nota</h2>
-                    <form id="nota-form" class="input-form">
-                        <input type="text" id="insert-nota" placeholder="Tu inserire nota bela" required /><br/>
-                        <button type="submit">Inserisci Nota Bela</button>
-                    </form>
-                </div>
-            </div>
-
-        </div> </div> <script src="./script/main.js"></script>
+  <div class="container">
+    <h1>Aggiungi nota bela</h1>
+    <div class="content-wrapper">
+      <!-- SINISTRA -->
+      <div class="left-column">
+        <section class="list-management-section card">
+          <h2>Le mie Liste</h2>
+          <ul id="main-list-tree" class="list-tree"><p>Caricamento delle liste...</p></ul>
+        </section>
+        <section class="archive-section card">
+          <h2>Archivio Liste</h2>
+          <button id="toggle-archive-btn" class="archive-toggle-button">Mostra Archivio</button>
+          <ul id="archive-list-tree" class="list-tree hidden"><p>Archivio vuoto o nascosto.</p></ul>
+        </section>
+      </div>
+      <!-- CENTRO -->
+      <div class="center-column">
+        <section class="note-management-section card">
+          <h2>Note della Lista Selezionata</h2>
+          <div id="note-list-div" class="notes-container">
+            <p>Seleziona una lista per visualizzare le note bele.</p>
+          </div>
+        </section>
+        <section class="note-form-section card">
+          <h2>Aggiungi Nuova Nota</h2>
+          <form id="nota-form" class="input-form">
+            <input type="text" id="insert-nota" placeholder="Tu inserire nota bela" required />
+            <button type="submit">Inserisci Nota Bela</button>
+          </form>
+        </section>
+      </div>
+      <!-- DESTRA -->
+      <div class="right-column">
+        <section class="list-form-section card">
+        <h2>Crea Nuova Lista</h2>
+        <form id="lista-form" class="input-form">
+        <input type="text" id="insert-lista" placeholder="Nome nuova lista bela" required />
+        <button type="submit">Crea Lista Bela</button>
+        </form>
+        </section>
+        <section class="tag-management-section card">
+          <h2>Gestione Tag</h2>
+          <form id="tag-form" class="input-form">
+            <input type="text" id="insert-tag" placeholder="Nome nuovo tag" required />
+            <button type="submit">Crea Tag</button>
+          </form>
+          <ul id="tags-list" class="tag-list"><p>Caricamento tag...</p></ul>
+        </section>
+        <section class="assign-tag-section card">
+          <h2>Assegna Tag alla Lista</h2>
+          <p>Lista selezionata: <span id="selected-list-name">Nessuna</span></p>
+          <div id="available-tags-checkboxes"><p>Seleziona una lista e carica i tag.</p></div>
+          <button id="save-list-tags-btn">Salva Tag per Lista</button>
+        </section>
+      </div>
+    </div>
+  </div>
+  <script src="./script/main.js"></script>
 </body>
-
 </html>
